@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import List from './List';
 import logo from './logo.svg';
 import './App.css';
@@ -54,13 +55,20 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <List title="On Court" handleClick={this.moveToBench}
-        list={this.state.players.onCourt} />
+        list={this.props.onCourt} />
         <List title="Benched" handleClick={this.moveToCourt}
-        list={this.state.players.benched} />
+        list={this.props.benched} />
         
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    benched: state.benched, 
+    onCourt: state.onCourt
+  }
+}
+
+export default connect(mapStateToProps)(App);
